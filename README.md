@@ -1,15 +1,12 @@
 # RateBook
 
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
 ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next-dot-js&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)
-
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
 ## Índice
@@ -18,17 +15,18 @@
     - [Frontend](#frontend-shields)
 2. [Descripción](#descripción)
 3. [Diagrama de Base de Datos](#diagrama-de-base-de-datos)
-4. [Características](#características)
+4. [Diagrama JWT](#diagrama-jwt)
+5. [Características](#características)
     - [Calificaciones de Artículos](#calificaciones-de-artículos)
     - [Reseñas de Usuarios](#reseñas-de-usuarios)
     - [Comentarios](#comentarios)
-5. [Restricciones](#restricciones)
-6. [Requisitos del Proyecto](#requisitos-del-proyecto)
+6. [Restricciones](#restricciones)
+7. [Requisitos del Proyecto](#requisitos-del-proyecto)
     - [Backend](#backend)
     - [Frontend](#frontend)
     - [Base de Datos](#base-de-datos)
     - [Despliegue](#despliegue)
-7. [Ejecución del Proyecto](#ejecución-del-proyecto)
+8. [Ejecución del Proyecto](#ejecución-del-proyecto)
     - [Pasos para Ejecutar el Proyecto](#pasos-para-ejecutar-el-proyecto)
 
 ## Descripción
@@ -38,6 +36,11 @@ RateBook es una plataforma donde los usuarios pueden calificar y reseñar pelíc
 El siguiente diagrama proporciona una visión clara de la estructura de la base de datos:
 
 [![Database Diagram](https://img.shields.io/badge/DB-Diagram-blue)](https://dbdiagram.io/d/RateBook-66a6c2088b4bb5230e921f66)
+
+## Diagrama JWT
+El diagrama de autenticación con JWT se muestra a continuación. Este diagrama se inspiró en el siguiente [video de YouTube](https://youtu.be/nwqQYCM4YT8?si=-v8o0gCAXOmYo7rk).
+
+![Diagrama JWT](./assets/diagram_jwt.png)
 
 ## Características
 
