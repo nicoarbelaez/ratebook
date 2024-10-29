@@ -1,14 +1,6 @@
 package com.nicoarbelaez.ratebook.user;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.nicoarbelaez.ratebook.util.ConsolePrinter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Table(name = "users")
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,26 +43,4 @@ public class User implements UserDetails {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    private transient UserService userService;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
-
-    @Override
-    public String getPassword() {
-        String password = userService.getPassword(id);
-        ConsolePrinter.info("User Entity: Retrieving password for user " + password);
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        String email = userService.getEmail(id);
-        ConsolePrinter.info("User Entity: Retrieving username for user " + email);
-        return email;
-    }
-
 }

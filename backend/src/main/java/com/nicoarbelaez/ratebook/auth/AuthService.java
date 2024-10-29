@@ -54,7 +54,7 @@ public class AuthService {
             return Optional.empty();
         }
 
-        String token = jwtService.getJwtToken(user);
+        String token = jwtService.getJwtToken(auth);
         ConsolePrinter.info("Generated token for user: " + authUser.getEmail());
         return Optional.of(new AuthTokenDto(token));
     }

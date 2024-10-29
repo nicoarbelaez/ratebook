@@ -41,8 +41,7 @@ public class ApplicationConfig {
         return userEmail -> {
             ConsolePrinter.info("Loading user by email: " + userEmail);
             return authRepository.findByEmail(userEmail)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"))
-                    .getUser();
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         };
     }
 
