@@ -40,11 +40,14 @@ El siguiente diagrama proporciona una visión clara de la estructura de la base 
 
 [![Database Diagram](https://img.shields.io/badge/DB-Diagram-blue)](https://dbdiagram.io/d/RateBook-66a6c2088b4bb5230e921f66)
 
-## Diagrama JWT
+## Diagramas JWT
 
-El diagrama de autenticación con JWT se muestra a continuación. Este diagrama se inspiró en el siguiente [video de YouTube](https://youtu.be/nwqQYCM4YT8?si=-v8o0gCAXOmYo7rk).
+El diagrama de autenticación con JWT (registro y login) se muestra a continuación. Este diagrama se inspiró en el siguiente [video de YouTube](https://youtu.be/nwqQYCM4YT8?si=-v8o0gCAXOmYo7rk).
 
-![Diagrama JWT](./assets/diagram_jwt.png)
+### Registro
+![Diagrama JWT Registro](./assets/diagram_jwt_register.png)
+### Login
+![Diagrama JWT Login](./assets/diagram_jwt_login.png)
 
 ## Características
 
