@@ -1,27 +1,26 @@
-# Utilizando OpenJDK 17 slim
+# Usa una imagen base de OpenJDK 17
 FROM openjdk:17-jdk-slim
 
-# Instalamos Maven en una sola capa para optimización
-RUN apt-get update && apt-get install -y --no-install-recommends maven && rm -rf /var/lib/apt/lists/*
+# Instala Maven
+RUN apt-get update && \
+    apt-get install -y maven && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Establecemos el directorio de trabajo
+# Establece el directorio de trabajo
 WORKDIR /app
 
-# Copiamos solo los archivos de configuración primero (para aprovechar la cache)
-COPY ./pom.xml ./mvnw ./
-COPY ./.mvn ./.mvn
+# Copia solo el archivo pom.xml para que Docker pueda cachear dependencias
+COPY pom.xml .
 
-# Descargamos las dependencias para cache
-RUN ./mvnw dependency:go-offline
+# Descarga las dependencias de Maven (esto solo ocurrirá si pom.xml cambia)
+RUN mvn dependency:go-offline
 
-# Copiamos el resto de los archivos del proyecto
-COPY . .
+# Copia el código fuente al contenedor
+COPY src ./src
 
-# Construimos el proyecto sin ejecutar tests
-RUN ./mvnw clean install -DskipTests
-
-# Exponemos el puerto 8080
+# Expone el puerto que utiliza tu aplicación
 EXPOSE 8080
 
-# Ejecutamos la aplicación en modo desarrollo
-ENTRYPOINT ["./mvnw", "spring-boot:run"]
+# Comando para ejecutar la aplicación
+CMD ["mvn", "spring-boot:run"]

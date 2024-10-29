@@ -2,6 +2,8 @@ package com.nicoarbelaez.ratebook.auth;
 
 import com.nicoarbelaez.ratebook.user.User;
 
+// import com.nicoarbelaez.ratebook.user.User;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,7 +18,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Data
@@ -24,7 +25,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @Table(name = "auth")
-@ToString(exclude = "user")
 public class Auth {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class Auth {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, optional = false)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
     private User user;
 }

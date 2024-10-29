@@ -8,17 +8,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.nicoarbelaez.ratebook.auth.Auth;
+import com.nicoarbelaez.ratebook.util.ConsolePrinter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,10 +35,10 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Column(name = "profile_image_url")
@@ -51,12 +49,10 @@ public class User implements UserDetails {
     private LocalDate date = LocalDate.now();
 
     @Column(nullable = false)
-    @Builder.Default
     @Enumerated(EnumType.STRING)
-    private Role role = Role.USER;
+    private Role role;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-    private Auth auth;
+    private transient UserService userService;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -65,11 +61,16 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return auth.getPassword();
+        String password = userService.getPassword(id);
+        ConsolePrinter.info("User Entity: Retrieving password for user " + password);
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return auth.getEmail();
+        String email = userService.getEmail(id);
+        ConsolePrinter.info("User Entity: Retrieving username for user " + email);
+        return email;
     }
+
 }
