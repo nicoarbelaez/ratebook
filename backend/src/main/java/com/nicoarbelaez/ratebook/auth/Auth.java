@@ -41,13 +41,13 @@ public class Auth implements UserDetails{
     @Column(nullable = false)
     private String password;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, optional = false)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
     private User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(user.getRole().name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
     }
 
     @Override

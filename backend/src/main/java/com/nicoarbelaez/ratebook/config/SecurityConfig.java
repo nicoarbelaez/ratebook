@@ -10,6 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.nicoarbelaez.ratebook.jwt.JwtAuthenticationFilter;
+import com.nicoarbelaez.ratebook.user.Role;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,8 +28,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
                     auth
-                            .requestMatchers("/api/auth/me").hasRole("USER")
-                            .requestMatchers("/api/users").hasRole("ADMIN")
+                            .requestMatchers("/api/auth/me").hasRole(Role.USER.name())
+                            .requestMatchers("/api/users").hasRole(Role.ADMIN.name())
                             .anyRequest().permitAll();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -36,36 +37,4 @@ public class SecurityConfig {
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
-
-    // @Bean
-    // public AuthenticationManager
-    // authenticationManager(AuthenticationConfiguration config) throws Exception {
-    // return config.getAuthenticationManager();
-    // }
-
-    // @Bean
-    // public AuthenticationProvider authenticationProvider() {
-    // DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-    // provider.setUserDetailsService(userDetailsService());
-    // provider.setPasswordEncoder(passwordEncoder());
-    // return provider;
-    // }
-
-    // @Bean
-    // public PasswordEncoder passwordEncoder() {
-    // return NoOpPasswordEncoder.getInstance();
-    // // return new BCryptPasswordEncoder();
-    // }
-
-    // @Bean
-    // public UserDetailsService userDetailsService() {
-    // return new UserDetailsService() {
-    // @Override
-    // public UserDetails loadUserByUsername(String email) {
-    // return authRepository.findByEmail(email)
-    // .map(Auth::getUser).orElseThrow(() -> new RuntimeException("User not
-    // found"));
-    // }
-    // };
-    // }
 }
