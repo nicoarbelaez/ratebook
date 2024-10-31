@@ -1,7 +1,7 @@
 # RateBook
 
 <div style="align-items: center; justify-content: center; display: flex;">
-    <img src="./assets/logo.jpeg" style="border-radius: 50% 50% 50% 10px; max-width: 150px;">
+    <img src="./assets/logo.jpeg" style="border-radius: 50% 50% 50% 10px; max-width: 150px; filter: drop-shadow(0 0 0.75rem crimson);">
 </div>
 
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
