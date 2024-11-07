@@ -109,15 +109,7 @@ Los usuarios pueden comentar los artículos y responder a otros comentarios. Tan
 2. **Frontend:** Desplegado en Vercel.
 3. **Docker:** Contenedores Docker para cada componente (backend y frontend), con archivos `docker-compose` para desarrollo y producción.
 
-## Ejecución del Proyecto
-
-Aquí tienes una tabla actualizada con endpoints más organizados y específicos, evitando duplicados y aplicando una estructura que aísla cada entidad de forma clara. En esta versión, las rutas para likes, comentarios y reseñas están bajo sus propios endpoints principales (`/api/likes/**`, `/api/comments/**`, `/api/reviews/**`), y los dislikes están integrados. También se asegura que las reseñas solo se relacionen con productos.
-
-### Distribución de Endpoints
-
-Aquí está la tabla con las modificaciones solicitadas. Los dislikes se han integrado dentro de la sección de "Likes", y se han eliminado los endpoints de la sección "Admin". Los permisos de rol "Admin" se han agregado donde corresponde en las secciones de Usuarios y Productos.
-
-### Distribución de Endpoints
+## Distribución de Endpoints
 
 | Sección           | Método | Endpoint             | Descripción                                 | Rol Requerido |
 | ----------------- | ------ | -------------------- | ------------------------------------------- | ------------- |
@@ -183,7 +175,7 @@ Aquí está la tabla con las modificaciones solicitadas. Los dislikes se han int
 |                      | `POST`   | `/api/likes/comment/{commentId}/dislike` | Dar dislike a un comentario    | Registrado    |
 |                      | `DELETE` | `/api/likes/comment/{commentId}/dislike` | Quitar dislike a un comentario | Registrado    |
 
-### Pasos para Ejecutar el Proyecto
+## Ejecución del Proyecto
 
 1. **Clonar el repositorio:**
 
