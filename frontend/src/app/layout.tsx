@@ -1,18 +1,32 @@
-import "../styles/globals.css";
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import "./globals.css";
 
-export const metadata = {
-  title: 'Auth App',
-  description: 'Authentication with Login and Register',
+const geistSans = localFont({
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+});
+
+export const metadata: Metadata = {
+  title: "Rate Book",
+  description:
+    "RateBook es una plataforma donde los usuarios pueden calificar y reseñar películas, series y libros.",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en">
-      <body className="bg-gray-100 text-gray-800">{children}</body>
+    <html lang="es">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
     </html>
   );
 }
