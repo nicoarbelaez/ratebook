@@ -1,8 +1,8 @@
-package com.nicoarbelaez.ratebook.comment;
+// package com.nicoarbelaez.ratebook.comment;
 
-import org.springframework.stereotype.Service;
+// import org.springframework.stereotype.Service;
 
-@Service
-public class CommentService {
+// @Service
+// public class CommentService {
     
-}
+// }

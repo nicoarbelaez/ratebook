@@ -1,5 +1,12 @@
 package com.nicoarbelaez.ratebook.auth;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.nicoarbelaez.ratebook.user.User;
 
 import jakarta.persistence.CascadeType;
@@ -16,7 +23,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Data
@@ -24,8 +30,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @Table(name = "auth")
-@ToString(exclude = "user")
-public class Auth {
+public class Auth implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,4 +44,18 @@ public class Auth {
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
     private User user;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+    @Override
+    public String getPassword() {
+        return password;
+    }
 }

@@ -5,15 +5,12 @@
 </div>
 
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
 ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next-dot-js&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)
-
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
 ## Índice
@@ -23,18 +20,18 @@
    - [Frontend](#frontend-shields)
 2. [Descripción](#descripción)
 3. [Diagrama de Base de Datos](#diagrama-de-base-de-datos)
-4. [Características](#características)
+4. [Diagrama JWT](#diagrama-jwt)
+5. [Características](#características)
    - [Calificaciones de Artículos](#calificaciones-de-artículos)
    - [Reseñas de Usuarios](#reseñas-de-usuarios)
    - [Comentarios](#comentarios)
-5. [Restricciones](#restricciones)
-6. [Requisitos del Proyecto](#requisitos-del-proyecto)
+6. [Restricciones](#restricciones)
+7. [Requisitos del Proyecto](#requisitos-del-proyecto)
    - [Backend](#backend)
    - [Frontend](#frontend)
    - [Base de Datos](#base-de-datos)
    - [Despliegue](#despliegue)
-7. [Ejecución del Proyecto](#ejecución-del-proyecto)
-   - [Pasos para Ejecutar el Proyecto](#pasos-para-ejecutar-el-proyecto)
+8. [Ejecución del Proyecto](#ejecución-del-proyecto)
 
 ## Descripción
 
@@ -45,6 +42,18 @@ RateBook es una plataforma donde los usuarios pueden calificar y reseñar pelíc
 El siguiente diagrama proporciona una visión clara de la estructura de la base de datos:
 
 [![Database Diagram](https://img.shields.io/badge/DB-Diagram-blue)](https://dbdiagram.io/d/RateBook-66a6c2088b4bb5230e921f66)
+
+## Diagramas JWT
+
+El diagrama de autenticación con JWT (registro y login) se muestra a continuación. Este diagrama se inspiró en el siguiente [video de YouTube](https://youtu.be/nwqQYCM4YT8?si=-v8o0gCAXOmYo7rk).
+
+### Registro
+
+![Diagrama JWT Registro](./assets/diagram_jwt_register.png)
+
+### Login
+
+![Diagrama JWT Login](./assets/diagram_jwt_login.png)
 
 ## Características
 
@@ -106,9 +115,73 @@ Los usuarios pueden comentar los artículos y responder a otros comentarios. Tan
 2. **Frontend:** Desplegado en Vercel.
 3. **Docker:** Contenedores Docker para cada componente (backend y frontend), con archivos `docker-compose` para desarrollo y producción.
 
-## Ejecución del Proyecto
+## Distribución de Endpoints
 
-### Pasos para Ejecutar el Proyecto
+| Sección           | Método | Endpoint             | Descripción                                 | Rol Requerido |
+| ----------------- | ------ | -------------------- | ------------------------------------------- | ------------- |
+| **Autenticación** | `POST` | `/api/auth/register` | Registro de un nuevo usuario                | Anónimo       |
+|                   | `POST` | `/api/auth/login`    | Inicio de sesión                            | Anónimo       |
+|                   | `POST` | `/api/auth/logout`   | Cerrar sesión                               | Registrado    |
+|                   | `GET`  | `/api/auth/me`       | Obtener información del usuario autenticado | Registrado    |
+
+---
+
+| Sección      | Método   | Endpoint                      | Descripción                                   | Rol Requerido |
+| ------------ | -------- | ----------------------------- | --------------------------------------------- | ------------- |
+| **Usuarios** | `GET`    | `/api/users`                  | Obtener lista de usuarios                     | Admin         |
+|              | `GET`    | `/api/users/{id}`             | Obtener detalles de un usuario específico     | Admin         |
+|              | `PUT`    | `/api/users/profile`          | Actualizar perfil del usuario autenticado     | Registrado    |
+|              | `DELETE` | `/api/users/profile`          | Eliminar cuenta del usuario autenticado       | Registrado    |
+|              | `PATCH`  | `/api/users/profile/password` | Cambiar la contraseña del usuario autenticado | Registrado    |
+
+---
+
+| Sección       | Método   | Endpoint             | Descripción                                | Rol Requerido |
+| ------------- | -------- | -------------------- | ------------------------------------------ | ------------- |
+| **Productos** | `GET`    | `/api/products`      | Obtener lista de productos                 | Anónimo       |
+|               | `GET`    | `/api/products/{id}` | Obtener detalles de un producto específico | Anónimo       |
+|               | `POST`   | `/api/products`      | Crear un nuevo producto                    | Admin         |
+|               | `PUT`    | `/api/products/{id}` | Actualizar un producto                     | Admin         |
+|               | `DELETE` | `/api/products/{id}` | Eliminar un producto                       | Admin         |
+
+---
+
+| Sección     | Método   | Endpoint                           | Descripción                              | Rol Requerido |
+| ----------- | -------- | ---------------------------------- | ---------------------------------------- | ------------- |
+| **Reseñas** | `GET`    | `/api/reviews/product/{productId}` | Obtener todas las reseñas de un producto | Anónimo       |
+|             | `POST`   | `/api/reviews/product/{productId}` | Crear una reseña para un producto        | Registrado    |
+|             | `PUT`    | `/api/reviews/{id}`                | Editar una reseña propia                 | Registrado    |
+|             | `DELETE` | `/api/reviews/{id}`                | Eliminar una reseña propia               | Registrado    |
+
+---
+
+| Sección         | Método   | Endpoint                            | Descripción                                   | Rol Requerido |
+| --------------- | -------- | ----------------------------------- | --------------------------------------------- | ------------- |
+| **Comentarios** | `GET`    | `/api/comments/product/{productId}` | Obtener comentarios de un producto            | Anónimo       |
+|                 | `POST`   | `/api/comments/product/{productId}` | Crear un comentario para un producto          | Registrado    |
+|                 | `PUT`    | `/api/comments/{id}`                | Editar un comentario propio                   | Registrado    |
+|                 | `DELETE` | `/api/comments/{id}`                | Eliminar un comentario propio                 | Registrado    |
+|                 | `POST`   | `/api/comments/{commentId}/reply`   | Responder a un comentario                     | Registrado    |
+|                 | `GET`    | `/api/comments/{commentId}/replies` | Obtener respuestas a un comentario específico | Anónimo       |
+
+---
+
+| Sección              | Método   | Endpoint                                 | Descripción                    | Rol Requerido |
+| -------------------- | -------- | ---------------------------------------- | ------------------------------ | ------------- |
+| **Likes y Dislikes** | `POST`   | `/api/likes/product/{productId}`         | Dar like a un producto         | Registrado    |
+|                      | `DELETE` | `/api/likes/product/{productId}`         | Quitar like a un producto      | Registrado    |
+|                      | `POST`   | `/api/likes/review/{reviewId}`           | Dar like a una reseña          | Registrado    |
+|                      | `DELETE` | `/api/likes/review/{reviewId}`           | Quitar like a una reseña       | Registrado    |
+|                      | `POST`   | `/api/likes/comment/{commentId}`         | Dar like a un comentario       | Registrado    |
+|                      | `DELETE` | `/api/likes/comment/{commentId}`         | Quitar like a un comentario    | Registrado    |
+|                      | `POST`   | `/api/likes/product/{productId}/dislike` | Dar dislike a un producto      | Registrado    |
+|                      | `DELETE` | `/api/likes/product/{productId}/dislike` | Quitar dislike a un producto   | Registrado    |
+|                      | `POST`   | `/api/likes/review/{reviewId}/dislike`   | Dar dislike a una reseña       | Registrado    |
+|                      | `DELETE` | `/api/likes/review/{reviewId}/dislike`   | Quitar dislike a una reseña    | Registrado    |
+|                      | `POST`   | `/api/likes/comment/{commentId}/dislike` | Dar dislike a un comentario    | Registrado    |
+|                      | `DELETE` | `/api/likes/comment/{commentId}/dislike` | Quitar dislike a un comentario | Registrado    |
+
+## Ejecución del Proyecto
 
 1. **Clonar el repositorio:**
 

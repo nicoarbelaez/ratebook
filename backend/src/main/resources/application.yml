@@ -1,11 +1,8 @@
 spring:
-  config:
-    import: "optional:file:../../../docker/.env"
   datasource:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     properties:
       hibernate:
@@ -23,9 +20,13 @@ server:
 logging:
   level:
     org:
+      # springframework: DEBUG
       hibernate:
         SQL: DEBUG
         type:
           descriptor:
             sql:
               BasicBinder: TRACE
+
+jwt:
+  secret: "Bx4MeizkOfmx5buS0AeRdfWkK1H4GI8abShDqtZq6gA="

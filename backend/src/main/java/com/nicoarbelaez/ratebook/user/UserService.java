@@ -3,6 +3,7 @@ package com.nicoarbelaez.ratebook.user;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.nicoarbelaez.ratebook.auth.Auth;
@@ -42,7 +43,7 @@ public class UserService {
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setProfileImageUrl(user.getProfileImageUrl());
         userToUpdate.setDate(user.getDate());
-        
+
         userRepository.save(userToUpdate);
         return Optional.of(UserMapper.toDto(userToUpdate));
     }
@@ -53,5 +54,14 @@ public class UserService {
             userRepository.delete(user);
             return true;
         }).orElse(false);
+    }
+
+    public String getPassword(Long id) {
+        return authRepository.findByUserId(id).map(Auth::getPassword).orElse(null);
+    }
+
+    public String getEmail(Long id) {
+        return authRepository.findByUserId(id).map(Auth::getEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("No username found for user ID " + id));
     }
 }
