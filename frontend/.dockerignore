@@ -1,9 +1,9 @@
 # Ignorar node_modules y archivos de salida
-node_modules
+node_modules/
 npm-debug.log
 yarn-error.log
-.next
-out
+.next/
+out/
 
 # Ignorar configuraciones y archivos locales
 .env
