@@ -30,6 +30,8 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "3000:3000"
+    environment:
+      - API_HOST=http://localhost:8080
     volumes:
       - ../frontend:/app
       - /app/node_modules

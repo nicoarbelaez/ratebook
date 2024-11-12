@@ -4,6 +4,7 @@ npm-debug.log
 yarn-error.log
 .next/
 out/
+.pnpm-store/
 
 # Ignorar configuraciones y archivos locales
 .env
