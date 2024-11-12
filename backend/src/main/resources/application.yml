@@ -17,16 +17,5 @@ server:
   error:
     include-message: always
 
-logging:
-  level:
-    org:
-      # springframework: DEBUG
-      hibernate:
-        SQL: DEBUG
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE
-
 jwt:
   secret: "Bx4MeizkOfmx5buS0AeRdfWkK1H4GI8abShDqtZq6gA="
