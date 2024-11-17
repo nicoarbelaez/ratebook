@@ -26,7 +26,7 @@
 
 // @RestController
 // @RequiredArgsConstructor
-// @RequestMapping("/api/ratings")
+// @RequestMapping("/ratings")
 // public class RatingController {
 
 //     private final RatingService ratingService;

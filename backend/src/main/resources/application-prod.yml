@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+server:
+  port: 8080
+  error:
+    include-message: always
+
+jwt:
+  secret: "Bx4MeizkOfmx5buS0AeRdfWkK1H4GI8abShDqtZq6gA="

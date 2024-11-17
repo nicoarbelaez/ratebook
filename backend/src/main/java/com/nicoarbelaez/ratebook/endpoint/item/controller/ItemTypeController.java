@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nicoarbelaez.ratebook.endpoint.item.enums.ItemType;
 
 @RestController
-@RequestMapping("/api/item-types")
+@RequestMapping("/item-types")
 public class ItemTypeController {
 
     @GetMapping

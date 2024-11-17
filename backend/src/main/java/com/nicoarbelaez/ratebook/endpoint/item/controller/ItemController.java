@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/api/items")
+@RequestMapping("/items")
 public class ItemController {
 
     private final ItemService itemService;
